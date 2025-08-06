@@ -1,69 +1,7 @@
-// import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import '../services/auth_service.dart';
-// import 'home_screen.dart';
-
-// class RegisterScreen extends StatefulWidget {
-//   @override
-//   State<RegisterScreen> createState() => _RegisterScreenState();
-// }
-
-// class _RegisterScreenState extends State<RegisterScreen> {
-//   final _emailController = TextEditingController();
-//   final _passwordController = TextEditingController();
-//   final AuthService _authService = AuthService();
-
-//   bool isLoading = false;
-
-//   void register() async {
-//     setState(() => isLoading = true);
-//     try {
-//       await _authService.register(
-//           _emailController.text.trim(), _passwordController.text.trim());
-//       Navigator.pushReplacement(
-//           context, MaterialPageRoute(builder: (_) => HomeScreen()));
-//     } on FirebaseAuthException catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message ?? "Registration Failed")));
-//     } finally {
-//       setState(() => isLoading = false);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Register')),
-//       body: Padding(
-//         padding: EdgeInsets.all(16),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             TextField(
-//               controller: _emailController,
-//               decoration: InputDecoration(labelText: 'Email'),
-//             ),
-//             TextField(
-//               controller: _passwordController,
-//               obscureText: true,
-//               decoration: InputDecoration(labelText: 'Password'),
-//             ),
-//             SizedBox(height: 20),
-//             isLoading
-//                 ? CircularProgressIndicator()
-//                 : ElevatedButton(
-//                     onPressed: register,
-//                     child: Text('Register'),
-//                   ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:notes_app_firebase/screens/notes_list.dart';
 import '../services/auth_service.dart';
-import 'home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -92,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ).showSnackBar(SnackBar(content: Text('Registration Successful!')));
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => NotesListScreen()),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -125,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 30),
                 TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
