@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notes_app_firebase/screens/notes_list.dart';
@@ -17,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
   bool isLoading = false;
 
-  void login() async {
+  void  login() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => isLoading = true);
@@ -49,7 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        // title: Text(
+        //   'LOGIN PAGE',
+        //   style: TextStyle(fontWeight: FontWeight.bold),
+        // ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24),
@@ -62,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Welcome Back!',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _emailController,
@@ -111,13 +120,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: login,
-                          child: Text('Login'),
                           style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
                             padding: EdgeInsets.symmetric(vertical: 16),
                             textStyle: TextStyle(fontSize: 16),
                           ),
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
+                SizedBox(height: 16),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -125,7 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       MaterialPageRoute(builder: (_) => RegisterScreen()),
                     );
                   },
-                  child: Text('Don\'t have an account? Register'),
+                  child: Text(
+                    'Don\'t have an account? Register',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             ),

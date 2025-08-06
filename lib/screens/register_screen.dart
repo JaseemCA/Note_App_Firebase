@@ -1,9 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:notes_app_firebase/screens/login_screen.dart';
 import 'package:notes_app_firebase/screens/notes_list.dart';
 import '../services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -48,7 +53,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        // title: Text('Register'),
+        centerTitle: true,
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24),
@@ -61,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Create Account',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _emailController,
@@ -110,13 +119,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: register,
-                          child: Text('Register'),
                           style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
                             padding: EdgeInsets.symmetric(vertical: 16),
                             textStyle: TextStyle(fontSize: 16),
                           ),
+                          child: Text(
+                            'REGISTER',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
+
+                SizedBox(height: 16),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginScreen()),
+                    );
+                  },
+                  child: Text(
+                    'Have an account? Login',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
               ],
             ),
           ),
